@@ -20,11 +20,11 @@
     <p class="aviso-js" id="aviso-js"></p>
   </div>
 
-  <!-- ===== ITEM 2 =====================================================
-       Acima da lista, exiba:
-         - havendo registros, a contagem, no formato:  N registro(s).
-         - nao havendo nenhum, a frase:  Nenhum palestrante cadastrado.
-       ================================================================== -->
+  {% if palestrantes %}
+    <p>{{ palestrantes|length }} registro(s).</p>
+  {% else %}
+    <p>Nenhum palestrande cadastrado.</p>
+  {% endif %}
 
   <ul id="lista">
     {% for item in palestrantes %}
