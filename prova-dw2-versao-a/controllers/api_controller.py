@@ -29,6 +29,18 @@ def listar():
 
     return jsonify(lista)
 
+@api_bp.route("/palestrantes/<int:id>", methods=["POST"])
+def api_cadastar():
+    palestrante = PalestranteDAO.buscar_por_id(id)
+
+    if not session.get(palestrante):
+        return jsonify({"erro": "Palestrante não encontrado."}), 400
+
+    return jsonify(palestrante.para_dicionario()), 200
+
+
+
+
 
 # ===== ITEM 7 ========================================================
 # Escreva aqui a rota GET /api/palestrantes/<id>, que devolve UM registro.
