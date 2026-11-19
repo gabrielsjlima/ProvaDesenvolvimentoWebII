@@ -8,12 +8,10 @@ from dao.palestrante_dao import PalestranteDAO
 
 palestrante_bp = Blueprint("palestrante", __name__)
 
-
-# ===== ITEM 5 ========================================================
-# Hoje qualquer pessoa abre as paginas deste Blueprint sem entrar no
-# sistema. Escreva aqui a protecao, em um ponto so.
-# =====================================================================
-
+@palestrante_bp.before_request
+def exibir_login():
+    if not session.get("usuario_id"):
+        return redirect(url_for("auth.login"))
 
 # Listagem (GET) e cadastro (POST) na mesma rota
 @palestrante_bp.route("/", methods=["GET", "POST"])
