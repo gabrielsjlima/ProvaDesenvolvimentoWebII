@@ -38,10 +38,16 @@ def index():
 def editar(id):
     palestrante = PalestranteDAO.buscar_por_id(id)
 
-    # ===== ITEM 4 ====================================================
-    # O formulario de edicao e enviado para esta rota por POST, mas nada
-    # e gravado. Trate aqui o envio: grave a alteracao e volte a listagem.
-    # =================================================================
+    if request.method == "POST":
+        PalestranteDAO.atualizar(
+            palestrante,
+            request.form["nome"],
+            request.form["tema"],
+            request.form["minutos"]
+            )
+
+        flash("Palestrante atualizado.")
+        return redirect(url_for("palestrante.index"))
 
     return render_template("editar.html", palestrante=palestrante)
 
