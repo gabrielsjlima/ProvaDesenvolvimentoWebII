@@ -36,13 +36,19 @@ if (botaoAtualizar && lista) {
 
   botaoAtualizar.addEventListener("click", function () {
 
-    // ===== ITEM 8 ===================================================
-    // Ao clicar no botao, peca a lista a API, no endereco
-    // /api/palestrantes, e redesenhe a lista da pagina com o que chegar,
-    // SEM recarregar. Use as funcoes que ja existem neste arquivo.
-    // Se nao for possivel falar com o servidor, avise na tela.
-    // ================================================================
+    fetch("/api/palestrantes")
+      .then(function (resposta){
+         return resposta.json();
+      })
+
+      .then(function (dados) {
+        desenharLista(dados);
+      })
+
+      .catch(function (erro) {
+        mostrarAviso("Não foi possível falar com o servidor.");
+      });
 
   });
-
+  
 }

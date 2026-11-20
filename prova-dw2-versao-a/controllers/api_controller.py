@@ -39,15 +39,6 @@ def api_cadastar():
     return jsonify(palestrante.para_dicionario()), 200
 
 
-
-
-
-# ===== ITEM 7 ========================================================
-# Escreva aqui a rota GET /api/palestrantes/<id>, que devolve UM registro.
-# Se o id nao existir, a resposta e 404 com {"erro": "Palestrante nao encontrado."}.
-# =====================================================================
-
-
 # ===== ITEM 9 ========================================================
 # Escreva aqui a rota DELETE /api/palestrantes/<id>, que remove UM registro.
 # Sucesso: 204, sem corpo. Se o id nao existir: 404 com
