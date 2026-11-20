@@ -38,9 +38,16 @@ def api_cadastar():
 
     return jsonify(palestrante.para_dicionario()), 200
 
+@api_bp.route("/palestrantes/<int:id>", methods=["DELETE"])
+def excluir():
+    if session.get("perfil") != "admin":
+        return jsonify({"erro": "Apenas coordenadores podem excluir."}), 403
+    
+    palestrante = PalestranteDAO.buscar_por_id(id)
 
-# ===== ITEM 9 ========================================================
-# Escreva aqui a rota DELETE /api/palestrantes/<id>, que remove UM registro.
-# Sucesso: 204, sem corpo. Se o id nao existir: 404 com
-# {"erro": "Palestrante nao encontrado."}.
-# =====================================================================
+    if not palestrante:
+        return jsonify({"erro": "Palestrante nao encontrado."}), 404
+
+    PalestranteDAO.excluir(palestrante)
+
+    return "", 204
