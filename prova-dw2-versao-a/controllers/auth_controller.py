@@ -3,7 +3,7 @@
 
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from flask import session
-from werkzeug.security import check_password_hash
+from werkzeug.security import check_password_hash, generate_password_hash
 from models.usuario import Usuario
 from dao.usuario_dao import UsuarioDAO
 
@@ -36,7 +36,7 @@ def cadastro():
         usuario = Usuario(
             nome=request.form["nome"],
             email=request.form["email"],
-            senha_hash=request.form["senha"]
+            senha_hash=generate_password_hash(request.form["senha"])
         )
         UsuarioDAO.salvar(usuario)
         flash("Conta criada. Faca login para continuar.")
